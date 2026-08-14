@@ -1,0 +1,313 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+/* ============================================================
+   UNNATI PHARMAX — BRAND DESIGN SYSTEM
+   Anchor colour: #F0AC1B (logo amber)
+
+   Contrast notes (WCAG 2.1):
+     #F0AC1B on white ....... 1.98:1  -> surfaces/accents ONLY, never text
+     #F0AC1B with ink-900 ... 9.1:1   -> the correct way to use brand fills
+     brand-800 on white ..... 5.93:1  -> use this for amber-coloured TEXT
+   Rule of thumb: amber carries dark text, it never carries white text.
+   ============================================================ */
+
+@theme {
+  /* ---- Brand amber ramp ---- */
+  --color-brand-50: #fff9ec;
+  --color-brand-100: #fef0ce;
+  --color-brand-200: #fde09d;
+  --color-brand-300: #f9cb63;
+  --color-brand-400: #f5ba38;
+  --color-brand-500: #f0ac1b;
+  --color-brand-600: #d18e0b;
+  --color-brand-700: #a96e0c;
+  --color-brand-800: #8a5a11;
+  --color-brand-900: #6e4813;
+  --color-brand-950: #402910;
+
+  /* ---- Warm neutral ink ramp ---- */
+  --color-ink-50: #faf8f4;
+  --color-ink-100: #f3efe7;
+  --color-ink-200: #e6e0d4;
+  --color-ink-300: #cfc6b5;
+  --color-ink-400: #a99e8a;
+  --color-ink-500: #7d7361;
+  --color-ink-600: #5c5445;
+  --color-ink-700: #423c31;
+  --color-ink-800: #2a251d;
+  --color-ink-900: #1a1610;
+  --color-ink-950: #0f0c08;
+
+  /* ---- Semantic roles ---- */
+  --color-brand: #f0ac1b;
+  --color-brand-ink: #8a5a11; /* amber that is safe as text on light */
+  /* Surface tiers — each step is perceptible, so cards lift off bands
+     and bands separate from each other. Base is the brand cream. */
+  --color-surface: #ffffff; /* cards: lift off every band below */
+  --color-surface-soft: #fffdf7; /* tier 0 - page + default section */
+  --color-surface-warm: #fbf4e6; /* tier 1 - alternating band, gives rhythm */
+  --color-surface-amber: #faeccf; /* tier 2 - accent band for emphasis */
+  --color-surface-dark: #1a1610; /* footer only */
+  --color-line: #e6e0d4;
+  --color-line-amber: #fde09d;
+  --color-body: #423c31;
+  --color-heading: #1a1610;
+  --color-success: #15803d;
+  --color-success-soft: #eaf6ed;
+  --color-danger: #b91c1c;
+  --color-danger-soft: #fdeaea;
+
+  /* ---- Elevation: warm-tinted, not grey ---- */
+  --shadow-soft: 0 1px 2px rgba(26, 22, 16, 0.04), 0 2px 8px rgba(26, 22, 16, 0.05);
+  --shadow-card: 0 4px 12px rgba(26, 22, 16, 0.06), 0 12px 28px rgba(26, 22, 16, 0.06);
+  --shadow-lift: 0 12px 24px rgba(138, 90, 17, 0.1), 0 24px 48px rgba(138, 90, 17, 0.08);
+  --shadow-amber: 0 8px 24px rgba(240, 172, 27, 0.28);
+
+  --font-family-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  color: var(--color-body);
+  background: var(--color-surface-soft);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Deliberately no `color` here. Setting color on the element itself would
+   defeat inheritance, forcing headings dark even inside white-on-image or
+   white-on-dark containers (e.g. .hero-card). Headings inherit their
+   container's color; sections that need a specific heading colour set it. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.02em;
+}
+
+img {
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--color-brand-200);
+  color: var(--color-ink-900);
+}
+
+/* Visible focus ring for keyboard users — required on a site
+   where people complete order and prescription forms. */
+:focus-visible {
+  outline: 2px solid var(--color-brand-600);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Warm scrollbar so it belongs to the palette */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ink-300) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--color-ink-100);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--color-ink-300);
+  border-radius: 999px;
+  border: 2px solid var(--color-ink-100);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-500);
+}
+
+/* ============================================================
+   SHARED BRAND PRIMITIVES
+   Reused across pages so buttons/chips stay identical sitewide.
+   ============================================================ */
+
+.btn-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--color-brand-500);
+  color: var(--color-ink-900);
+  border: none;
+  border-radius: 10px;
+  padding: 13px 28px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-brand:hover {
+  background: var(--color-brand-400);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-amber);
+}
+
+.btn-brand:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--color-brand-800);
+  border: 1.5px solid var(--color-brand-500);
+  border-radius: 10px;
+  padding: 12px 26px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-outline:hover {
+  background: var(--color-brand-500);
+  color: var(--color-ink-900);
+}
+
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--color-ink-900);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 28px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-dark:hover {
+  background: var(--color-ink-800);
+}
+
+.chip-brand {
+  display: inline-block;
+  background: var(--color-brand-100);
+  color: var(--color-brand-800);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 6px 14px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+/* Thin amber rule used to separate major sections */
+.brand-rule {
+  height: 3px;
+  width: 56px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-brand-500), var(--color-brand-300));
+}
+
+/* ============================================================
+   LEGACY UTILITIES (kept — referenced by product grids)
+   ============================================================ */
+
+/* Price shown under product cards on category pages */
+.medicine-price {
+  margin-top: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-brand-800);
+}
+
+/* Loading / empty / error message inside a product grid */
+.products-status {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 0;
+  font-size: 18px;
+  color: var(--color-ink-500);
+}
+
+.product-overlay {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.cart-btn,
+.select-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.cart-btn {
+  background: #111111;
+  color: #ffffff;
+}
+
+.cart-btn-added {
+  background: #111111;
+  color: #ffffff;
+}
+
+.select-btn {
+  background: var(--color-brand-100);
+  color: var(--color-brand-800);
+}
+
+.cart-btn:hover,
+.select-btn:hover {
+  transform: translateY(-1px);
+}

@@ -1,0 +1,261 @@
+/* ============================================================
+   TermsPage.css  —  Terms & Conditions page styles
+   Only used by TermsPage.jsx — no other component is affected.
+   ============================================================ */
+
+/* ── Page wrapper ── */
+.terms-page {
+  background: #ffffff;
+  padding: 72px 0 80px;
+}
+
+/* ── Centered container ── */
+.terms-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 310px;
+  gap: 72px;
+  align-items: start;
+}
+
+/* ══════════════════════════════════════════════
+   LEFT COLUMN — Main content
+══════════════════════════════════════════════ */
+.terms-main {
+  min-width: 0; /* prevent grid blowout */
+}
+
+.terms-main-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--color-ink-400);
+  text-transform: uppercase;
+  margin: 0 0 14px;
+}
+
+.terms-main-heading {
+  font-size: 58px;
+  font-weight: 800;
+  color: var(--color-ink-900);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.05;
+  margin: 0 0 48px;
+}
+
+/* Divider accent */
+.terms-divider {
+  width: 56px;
+  height: 3px;
+  background: var(--color-brand-500);
+  margin-bottom: 40px;
+  border: none;
+}
+
+/* Section sub-headings */
+.terms-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-ink-900);
+  margin: 40px 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Body paragraphs */
+.terms-para {
+  font-size: 18px;
+  line-height: 1.9;
+  color: var(--color-ink-700);
+  margin: 0 0 24px;
+}
+
+.terms-para:last-child {
+  margin-bottom: 0;
+}
+
+/* ══════════════════════════════════════════════
+   RIGHT COLUMN — Sticky sidebar
+══════════════════════════════════════════════ */
+.terms-sidebar {
+  position: sticky;
+  top: 120px;
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-line);
+  padding: 36px 28px;
+  border-radius: 2px;
+}
+
+.terms-sidebar-heading {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-ink-900);
+  margin: 0 0 20px;
+  line-height: 1.3;
+}
+
+.terms-sidebar-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--color-ink-400);
+  text-transform: uppercase;
+  margin: 0 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.terms-sidebar-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-line);
+}
+
+.terms-sidebar-email-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-ink-700);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 6px;
+}
+
+.terms-sidebar-email-link {
+  display: block;
+  font-size: 15px;
+  color: var(--color-brand-800);
+  text-decoration: none;
+  font-weight: 500;
+  word-break: break-all;
+  margin-bottom: 28px;
+  transition: color 0.15s;
+}
+
+.terms-sidebar-email-link:hover {
+  color: var(--color-brand-900);
+  text-decoration: underline;
+}
+
+/* Contact Us button */
+.terms-contact-btn {
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-brand-800);
+  background: #ffffff;
+  border: 2px solid var(--color-brand-500);
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.terms-contact-btn:hover {
+  background: var(--color-brand-500);
+  color: var(--color-ink-900);
+}
+
+/* ══════════════════════════════════════════════
+   SCROLL TO TOP — fixed square button
+══════════════════════════════════════════════ */
+.terms-scroll-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 48px;
+  height: 48px;
+  background: var(--color-line);
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--color-ink-700);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, background 0.15s;
+  z-index: 999;
+}
+
+.terms-scroll-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.terms-scroll-top:hover {
+  background: var(--color-ink-300);
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+
+/* Tablet — ≤ 992px */
+@media (max-width: 992px) {
+  .terms-container {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 0 28px;
+  }
+
+  .terms-sidebar {
+    position: static;
+  }
+
+  .terms-main-heading {
+    font-size: 42px;
+  }
+
+  .terms-page {
+    padding: 52px 0 60px;
+  }
+}
+
+/* Mobile — ≤ 640px */
+@media (max-width: 640px) {
+  .terms-container {
+    padding: 0 18px;
+    gap: 36px;
+  }
+
+  .terms-main-heading {
+    font-size: 30px;
+    margin-bottom: 32px;
+  }
+
+  .terms-para {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .terms-section-title {
+    font-size: 17px;
+  }
+
+  .terms-sidebar {
+    padding: 24px 18px;
+  }
+
+  .terms-page {
+    padding: 36px 0 48px;
+  }
+
+  .terms-scroll-top {
+    bottom: 20px;
+    right: 16px;
+    width: 42px;
+    height: 42px;
+  }
+}

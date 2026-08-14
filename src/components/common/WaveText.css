@@ -1,0 +1,57 @@
+/* ================= BUBBLY TEXT ANIMATION ================= */
+
+/* Keyframes for entrance bubbly animation on load (from scale 0 to 1.5 to 1) */
+@keyframes bubbly {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gentleLoop {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-2px) scale(1.01);
+  }
+}
+
+.wave-text {
+  display: inline;
+}
+
+.wave-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.wave-letter {
+  display: inline-block;
+  opacity: 0; /* hidden initially until load animation starts */
+  transform: scale(0);
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  will-change: transform, opacity;
+}
+
+/* Spaces between words stay fixed */
+.wave-letter-space {
+  display: inline-block;
+  white-space: pre;
+}
+
+/* Page load bubbly animation followed by a gentle continuous loop */
+.wave-text.animate-load .wave-letter {
+  animation: bubbly 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+    gentleLoop 1.2s ease-in-out infinite;
+  animation-delay: var(--char-delay), calc(var(--char-delay) + 0.6s);
+}
